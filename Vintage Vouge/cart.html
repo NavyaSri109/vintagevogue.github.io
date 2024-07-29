@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - VintaGe VoGue</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="stylesp.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function loadCart() {
+            // Get cart from local storage
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartContainer = document.getElementById('cart-items');
+            let total = 0;
+
+            // Clear previous content
+            cartContainer.innerHTML = '';
+
+            // Add cart items to the page
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <h3>${item.name}</h3>
+                    <p>Price: $${item.price.toFixed(2)}</p>
+                `;
+                cartContainer.appendChild(cartItem);
+                total += item.price;
+            });
+
+            // Display message if cart is empty
+            if (cart.length === 0) {
+                cartContainer.innerHTML = '<p>Your cart is empty.</p>';
+            }
+
+            // Display total
+            document.getElementById('total-amount').textContent = `Total: $${total.toFixed(2)}`;
+        }
+
+        function proceedToPay() {
+            const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+            alert(`Payment done with ${paymentMethod}.`);
+            localStorage.removeItem('cart'); // Clear the cart after payment
+            window.location.href = 'products.html'; // Redirect to products page or another page
+        }
+
+        function logout() {
+            // Clear user-related data from local storage
+            localStorage.removeItem('user');
+            localStorage.removeItem('cart'); // Optional: clear cart on logout
+            window.location.href = 'login.html'; // Redirect to login page
+        }
+
+        document.addEventListener('DOMContentLoaded', loadCart);
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-brown-dark">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-store"></i> VintaGe VoGue
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-danger" onclick="logout()">Log Out</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <h1 class="text-center text-brown-dark">Your Cart</h1>
+        <div class="content p-4 bg-brown-light text-brown-dark">
+            <div id="cart-items"></div>
+            <h3 id="total-amount" class="mt-3">Total: $0.00</h3>
+
+            <!-- Payment options -->
+            <div class="mt-4">
+                <h4>Payment Method</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment-method" id="cod" value="Cash on Delivery" checked>
+                    <label class="form-check-label" for="cod">
+                        Cash on Delivery
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payment-method" id="online" value="Online Payment">
+                    <label class="form-check-label" for="online">
+                        Online Payment
+                    </label>
+                </div>
+                <button class="btn btn-primary mt-3" onclick="proceedToPay()">Proceed to Pay</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-brown-dark text-white text-center py-3 mt-4">
+        <p>&copy; 2024 VintaGe VoGue. All rights reserved.</p>
+    </footer>
+</body>
+</html>

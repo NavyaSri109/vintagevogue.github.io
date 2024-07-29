@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #4e342e;
+}
+
+.bg-brown-dark {
+    background-color: #3e2723 !important;
+}
+
+.text-brown-dark {
+    color: #3e2723 !important;
+}
+
+.bg-brown-light {
+    background-color: #d7ccc8 !important;
+}
+
+.navbar {
+    background-color: #bd5e4d;
+}
+
+.navbar .nav-link {
+    color: #d7ccc8;
+    margin: 0 10px;
+}
+
+main {
+    background: url('blur.png') no-repeat center center fixed;
+    background-size: cover;
+    padding: 60px 20px;
+    min-height: 80vh;
+    position: relative;
+}
+
+.content {
+    background-color: rgba(218, 179, 166, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    color: #3e2723;
+}
+
+footer {
+    background-color:  #bd5e4d;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+}
